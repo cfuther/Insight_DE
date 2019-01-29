@@ -7,6 +7,15 @@ import pandas as pd
 inputfile = sys.argv[1]
 df = pd.read_csv(inputfile,sep=',')
 
+# remove duplicate rows
+df.drop_duplicates(inplace=True)
+
+# check on NaNs
+# If cost is NaN, does not affect results, keep. 
+# If medication name is NaN, it will create a new group NaN, which does not make sense, remove.
+# If last name/first name is NaN, it will affect the count results, remove.
+df = df[(df.drug_name.notnull()) & (df.prescriber_last_name.notnull()) & (df.prescriber_first_name.notnull())]
+
 # combine last name and first name to a new column
 df['prescriber_name'] = df['prescriber_last_name']+(df['prescriber_first_name'])
 
