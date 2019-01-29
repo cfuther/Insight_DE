@@ -1,1 +1,1 @@
-This directory is where we would expect your program to write the requested output files.
+This directory includes output by running the script using the test input.
